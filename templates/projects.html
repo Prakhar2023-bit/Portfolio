@@ -1,9 +1,44 @@
 {% extends 'base.html' %}
 {% block title %}My Projects{% endblock %}
+
 {% block content %}
-<h2>Projects</h2>
-<ul>
-    <li><a href="https://github.com/Prakhar2023-bit/YbiInternshipProjects" target="_blank">Item Outlet Sales Prediction</a></li>
-    <li><a href="https://github.com/Prakhar2023-bit/quiz_master" target="_blank">QuizMaster Application</a></li>
-</ul>
+<div class="container my-5">
+  <h2 class="mb-4 text-center">🚀 My Projects</h2>
+
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Item Outlet Sales Prediction</h5>
+          <p class="card-text">
+            A machine learning project to predict sales using a Random Forest Regressor, based on outlet and item data.
+          </p>
+        </div>
+        <div class="card-footer bg-white border-top-0">
+          <a href="https://github.com/Prakhar2023-bit/YbiInternshipProjects" class="btn btn-sm btn-outline-primary" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">QuizMaster Application</h5>
+          <p class="card-text">
+            A full-featured quiz app built with Flask and SQLite. Users can take quizzes, view scores, and manage questions.
+          </p>
+        </div>
+        <div class="card-footer bg-white border-top-0">
+          <a href="https://github.com/Prakhar2023-bit/quiz_master" class="btn btn-sm btn-outline-primary" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 {% endblock %}

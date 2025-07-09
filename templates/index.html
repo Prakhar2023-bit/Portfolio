@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
-{% block title %}Home - My Portfolio{% endblock %}
+{% block title %}Home - Prakhar Swaroop{% endblock %}
+
 {% block content %}
-<h2>Welcome!</h2>
-<p>This is my personal portfolio built using Flask.</p>
+<div class="container my-5 text-center">
+  <h1 class="mb-4">👋 Hi, I'm <span class="text-primary">Prakhar Swaroop</span></h1>
+  <p class="lead">Aspiring Software Developer | Python Enthusiast | Tech Explorer</p>
+  
+  <div class="mt-4">
+    <a href="{{ url_for('projects') }}" class="btn btn-outline-primary me-2">
+      <i class="fas fa-folder-open"></i> View Projects
+    </a>
+    <a href="{{ url_for('contact') }}" class="btn btn-primary">
+      <i class="fas fa-envelope"></i> Contact Me
+    </a>
+  </div>
+</div>
 {% endblock %}
