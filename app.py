@@ -1,9 +1,12 @@
-from flask import Flask, render_template, url_for, request, redirect, jsonify
+from flask import Flask, render_template, url_for, request, redirect, jsonify,session, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///portfolio.db'
+db_path = os.path.join('/mnt/data', 'site.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
+app.secret_key = 'your-secret-key'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -57,6 +60,29 @@ def contact():
 def api_messages():
     messages = Message.query.order_by(Message.timestamp.desc()).all()
     return jsonify([m.to_dict() for m in messages])
+
+@app.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        password = request.form.get('password')
+        if password == 'admin123':  # CHANGE THIS PASSWORD!
+            session['admin_logged_in'] = True
+            return redirect(url_for('admin_messages'))
+        else:
+            flash('Incorrect password', 'danger')
+    return render_template('admin_login.html')
+
+@app.route('/admin/messages')
+def admin_messages():
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin_login'))
+    messages = Message.query.order_by(Message.id.desc()).all()
+    return render_template('admin_messages.html', messages=messages)
+
+@app.route('/admin/logout')
+def admin_logout():
+    session.pop('admin_logged_in', None)
+    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
